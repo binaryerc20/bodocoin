@@ -1,1 +1,641 @@
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$BODO</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.glitch.global/101b98da-ad29-4778-ae58-e2ec8ffdd2c6/icon.png?v=1714686451714"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        cursor: url('https://cdn.glitch.global/101b98da-ad29-4778-ae58-e2ec8ffdd2c6/dogemouse1.png?v=1714688533468'), auto;
+          
+      }
+      .video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        z-index: -1;
+      }
+      .btn-BODE {
+        display: box;
+        position: fixed;
+        width: 34%;
+        height: 16%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-X {
+        display: box;
+        position: fixed;
+        width: 6%;
+        height: 17%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-TG {
+        display: box;
+        position: fixed;
+        width: 8%;
+        height: 17%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-DEX {
+        display: box;
+        position: fixed;
+        width: 12%;
+        height: 17%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-CA {
+        display: box;
+        position: fixed;
+        width: 66%;
+        height: 6%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-t0k {
+        display: box;
+        position: fixed;
+        width: 32%;
+        height: 16%;
+        background: none;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .btn-BODE:hover::before,
+      .btn-X:hover::before,
+      .btn-TG:hover::before,
+      .btn-DEX:hover::before,
+      .btn-CA:hover::before,
+      .btn-t0k:hover::before{
+        animation: none;
+        opacity: 0.4;
+        transform: scale(1.3);
+      }
+      .btn-BODE.is-clicked,
+      .btn-X.is-clicked,
+      .btn-TG.is-clicked,
+      .btn-DEX.is-clicked,
+      .btn-CA.is-clicked,
+      .btn-t0k.is-clicked{
+        background: linear-gradient(to bottom, gray 0%, dimgray 100%);
+      }
+
+      .btn-BODE.is-clicked:before,
+      .btn-X.is-clicked:before,
+      .btn-TG.is-clicked:before,
+      .btn-DEX.is-clicked:before,
+      .btn-CA.is-clicked:before,
+      .btn-t0k.is-clicked:before{
+        animation: blastOut 1s;
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+          opacity: 0.4;
+        }
+        to {
+          transform: scale(1.7);
+          opacity: 0;
+        }
+      }
+
+      @keyframes blastOut {
+        from {
+          transform: scale(0.9);
+          opacity: 0.4;
+        }
+        to {
+          transform: scale(10);
+          opacity: 0;
+        }
+      }
+
+      .slotcontainer {
+        display: relative;
+        text-align: center;
+        font-size: 0;
+        z-index: 102;
+      }
+      .slot {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        font-size: 24px;
+        font-family: Source Sans Pro;
+        line-height: 100px;
+        color: gold;
+        text-shadow: 0px 2px 20px white;
+      }
+      
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: black;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 20;
+        background: url('https://cdn.glitch.global/f1e239c9-7a79-44c1-8c54-a018ec2b2695/bgbgbg.png?v=1707905563582') center; 
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px gold;
+    }
+
+
+    .widget-container {
+      text-align: center;
+      margin-top: 20px;
+
+    }
+    .widget-line {
+        color: gold;
+        font-size: 15px;
+        transition: color 0.4s;
+        font-family: 'Alegreya Sans';
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+      }
+      @media (max-width: 1200px) {
+        .text-mint {
+          font-size: 15px;
+        }
+      }
+      @media (max-width: 480px) {
+        .text-mint {
+          font-size: 10px;
+        }
+      }  
+
+    .widget-line:last-child {
+      margin-bottom: 0;
+    }
+    .widget-btn {
+        display: inline-block;
+        width: auto;
+        padding: 10px 20px;
+        background-color: transparent;
+        border: 2px solid gold;
+        color: red;
+        font-size: 1.2rem;
+        text-align: center;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+
+    .widget-btn:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .widget-btn-container {
+        text-align: center; /* Center-align the contents */
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <video id="video-bg" class="video-bg" autoplay loop muted playsinline>
+      <source
+        src="https://cdn.glitch.global/101b98da-ad29-4778-ae58-e2ec8ffdd2c6/bookdoge-titF.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+
+    <a href="https://twitter.com/bodecoineth" class="btn-X" target="_blank" style="right: 24%; top: 0%"></a>
+    <a href="/" class="btn-BODE" target="_blank" style="left: 0%; top: 0%"></a>
+    <a href="https://t.me/bodecoineth" class="btn-TG" target="_blank" style="right: 0%; top: 0%"></a>
+    <a href="https://dexscreener.com/ethereum/0x420693134600B2762767CaB88043Ab386351851D" class="btn-DEX" target="_blank" style="right: 10%; top: 0%"></a>
+    <a href="https://etherscan.io/token/0x420693134600B2762767CaB88043Ab386351851Dr" class="btn-CA" target="_blank" style="left: 0%; bottom: 7%"></a>
+    <a class="btn-t0k" onclick="showPopupMint()" style="right: 1%; bottom: 0%"></a>
+    <div class="popup" id="popupTok">     
+        <div class="widget-container">
+          <br>
+            <div id="l1" class="widget-line">$BODO</div>
+          <br>
+            <div id="l2" class="widget-line">SUPPLY : 420,690,000,000</div>
+          <br>
+            <div id="l3" class="widget-line">100% LP BURNT</div>
+          <br>
+            <div id="l4" class="widget-line">0/0 TAX</div>
+          <br>
+            <div id="l5" class="widget-line">Ownership renounced</div>
+          <br>
+          <br>
+            <button onclick="closePopupTok()" class="widget-btn">Close</button>
+          <br>
+        </div>
+    </div>
+    
+    
+    <br />
+    <br />
+    <div class="slotcontainer">
+      <div class="slot">
+        <div id="scroll1">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll2">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll3">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll4">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll5">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll6">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll7">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll8">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll9">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll10">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll11">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>O</div>
+          <div>F</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll12">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll13">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll14">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll15">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll16">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll17">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll18">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll19">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+      <div class="slot">
+        <div id="scroll20">
+          <div>B</div>
+          <div>O</div>
+          <div>O</div>
+          <div>K</div>
+          <div>o</div>
+          <div>f</div>
+          <div>D</div>
+          <div>O</div>
+          <div>G</div>
+          <div>E</div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <script>
+    var numberSpin = function (selector) {
+      var element = document.getElementById(selector);
+      var factor = 10 + Math.floor(Math.random() * 10);
+      var num = 50;
+      var section = 100 / (num + 1);
+      var stopValue = 1;
+      var spin = function (flag, x) {
+        var value = element.style.transform;
+        value = value ? parseFloat(value.split("(")[1].split(")").join("")) : 0;
+        if (flag && flag == true) {
+          if (
+            stopValue != 1 &&
+            (value <= stopValue || value - section / factor <= stopValue) &&
+            typeof x != "undefined" &&
+            value >= x * -section &&
+            value <=
+              (x - 0.5 >= 0 ? x - 0.5 : stopValue == 0 ? 0 : 0.5) * -section
+          ) {
+            element.style.transform = "translateY(" + stopValue + "%)";
+            stopValue = 1;
+            return true;
+          }
+          stopValue =
+            Math.floor(value / section) >= -num
+              ? Math.floor(value / section) * section
+              : 0;
+        }
+        if (value && value <= -(section * num)) {
+          element.style.transform = "translateY(" + section + "%)";
+          value = 0;
+        } else {
+          value -= section / factor;
+        }
+        element.style.transform = "translateY(" + value + "%)";
+        return false;
+      };
+
+      var spinTimer = setInterval(spin, 10);
+
+      function stop(delay, x) {
+        setTimeout(function () {
+          clearTimeout(spinTimer);
+          var stopTimer = setInterval(function () {
+            if (spin(true, x)) {
+              clearInterval(stopTimer);
+            }
+          }, 10);
+        }, delay);
+      }
+      return {
+        stop: function (delay, x) {
+          return stop(delay, x);
+        },
+      };
+    };
+    numberSpin("scroll1");
+    numberSpin("scroll2");
+    numberSpin("scroll3");
+    numberSpin("scroll4");
+    numberSpin("scroll5");
+    numberSpin("scroll6");
+    numberSpin("scroll7");
+    numberSpin("scroll8");
+    numberSpin("scroll9");
+    numberSpin("scroll10");
+    numberSpin("scroll11");
+    numberSpin("scroll12");
+    numberSpin("scroll13");
+    numberSpin("scroll14");
+    numberSpin("scroll15");
+    numberSpin("scroll16");
+    numberSpin("scroll17");
+    numberSpin("scroll18");
+    numberSpin("scroll19");
+    numberSpin("scroll20");
+    
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   const video = document.getElementById("video-bg");
+    //   document.body.addEventListener("click", function (event) {
+    //     if (!event.target.closest(".btn-BODE, .btn-X, .btn-TG, .btn-DEX, .btn-CA, .btn-t0k")) {
+    //       if (video.paused) {
+    //         video.play();
+    //       } else {
+    //         video.pause();
+    //       }
+    //     }
+    //   });
+    // });
+    
+    
+    function showPopupMint() {
+            document.getElementById('popupTok').style.display = 'block';
+        }
+
+        function closePopupTok() {
+            document.getElementById('popupTok').style.display = 'none';
+        }
+  </script>
+</html>
